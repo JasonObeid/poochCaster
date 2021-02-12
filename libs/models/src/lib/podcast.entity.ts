@@ -4,7 +4,7 @@ import { Column, Entity } from "typeorm"
 import { RootEntity } from "./root.entity"
 
 @Entity()
-export class Todo extends RootEntity {
+export class Podcast extends RootEntity {
   @Column()
   @MinLength(5, { always: true })
   text: string

@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
-import { RootEntity } from "@stator/models"
+import { RootEntity } from "@poochCaster/models"
 import { AxiosResponse } from "axios"
 
 import { environment } from "../../environments/environment"

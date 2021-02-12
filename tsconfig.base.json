@@ -16,8 +16,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@stator/models": ["libs/models/src/index.ts"]
+      "@poochCaster/models": ["libs/models/src/index.ts"]
     }
   },
-  "exclude": ["stator/node_modules", "tmp"]
+  "exclude": ["poochCaster/node_modules", "tmp"]
 }

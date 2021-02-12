@@ -7,7 +7,7 @@ export const configurationTest = () => {
 
     database: {
       ...baseConfig.database,
-      name: process.env.DATABASE_NAME || "stator-test",
+      name: process.env.DATABASE_NAME || "poochCaster-test",
     },
   }
 }

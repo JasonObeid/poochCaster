@@ -1,11 +1,11 @@
-import { combineReducers } from "@reduxjs/toolkit"
+import { combineReducers } from "@reduxjs/toolkit";
 
-import { todoSlice } from "./todos/todos.slice"
+import { podcastSlice } from "./podcasts/podcasts.slice";
 
 const rootReducer = combineReducers({
-  todoReducer: todoSlice.reducer,
-})
+  podcastReducer: podcastSlice.reducer,
+});
 
-export type RootState = ReturnType<typeof rootReducer>
+export type RootState = ReturnType<typeof rootReducer>;
 
-export default rootReducer
+export default rootReducer;

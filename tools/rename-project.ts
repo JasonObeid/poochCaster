@@ -17,14 +17,14 @@ async function main() {
     const cli = meow(
       `
 	Usage
-	  $ rename-project --organization chocolat-chaud-io --project stator
+	  $ rename-project --organization Jason --project poochCaster
 
 	Options
 	  --organization, -on  The name of your github organization or personal account
 	  --project,      -pn  The name of the project
 
 	Examples
-	  $ rename-project --organization chocolat-chaud-io --project stator
+	  $ rename-project --organization Jason --project poochCaster
 `,
       {
         flags: {
@@ -61,7 +61,7 @@ async function main() {
       if (entryStat.isFile()) {
         const fileContent = await fs.promises.readFile(entry, "utf-8")
         if (fileContent) {
-          const replacedFileContent = fileContent.replace(/chocolat-chaud-io/gim, organization).replace(/stator/gim, project)
+          const replacedFileContent = fileContent.replace(/Jason/gim, organization).replace(/poochCaster/gim, project)
           await fs.promises.writeFile(entry, replacedFileContent, "utf-8")
         }
       }

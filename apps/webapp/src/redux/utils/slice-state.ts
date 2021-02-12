@@ -1,4 +1,4 @@
-import { RootEntity } from "@stator/models"
+import { RootEntity } from "@poochCaster/models"
 
 export interface SliceState<T> {
   entities: T[]

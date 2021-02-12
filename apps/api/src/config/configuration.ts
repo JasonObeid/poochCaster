@@ -1,6 +1,6 @@
 import { ConfigService } from "@nestjs/config"
 import { TypeOrmModuleOptions } from "@nestjs/typeorm/dist/interfaces/typeorm-options.interface"
-import { Todo } from "@stator/models"
+import { Podcast } from "@poochCaster/models"
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const ormConfig = require("../../../database/orm-config")
@@ -34,5 +34,5 @@ export const getOrmConfigFn = async (configService: ConfigService): Promise<Type
           ca: configService.get("database.certificateAuthority"),
         }
       : false,
-    entities: [Todo],
+    entities: [Podcast],
   })

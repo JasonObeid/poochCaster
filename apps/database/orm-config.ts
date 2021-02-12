@@ -6,7 +6,7 @@ const ormConfig: PostgresConnectionOptions = {
   port: parseInt(process.env.DATABASE_PORT, 10) || 5433,
   username: process.env.DATABASE_USERNAME || "postgres",
   password: process.env.DATABASE_PASSWORD || "postgres",
-  database: process.env.DATABASE_NAME || "stator",
+  database: process.env.DATABASE_NAME || "poochCaster",
   synchronize: !!(process.env.DATABASE_SYNCHRONIZE ?? true),
 
   entities: [__dirname + "/../../libs/**/*.entity{.ts,.js}"],

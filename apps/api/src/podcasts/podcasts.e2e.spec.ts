@@ -1,28 +1,28 @@
 import { INestApplication } from "@nestjs/common"
 import { Test } from "@nestjs/testing"
-import { Todo } from "@stator/models"
+import { Podcast } from "@poochCaster/models"
 import * as supertest from "supertest"
 import { Repository } from "typeorm"
 
 import { configurationTest } from "../config/configuration.test"
 import { getRootModuleImports } from "../utils"
-import { TodosModule } from "./todos.module"
+import { PodcastsModule } from "./podcasts.module"
 
-describe("Todos", () => {
+describe("Podcasts", () => {
   let app: INestApplication
-  let repository: Repository<Todo>
+  let repository: Repository<Podcast>
 
   const dateExpectations = { createdAt: expect.any(String), updatedAt: expect.any(String) }
 
   beforeAll(async () => {
     const module = await Test.createTestingModule({
-      imports: [...getRootModuleImports(configurationTest), TodosModule],
+      imports: [...getRootModuleImports(configurationTest), PodcastsModule],
     }).compile()
 
     app = module.createNestApplication()
     await app.init()
 
-    repository = module.get("TodoRepository")
+    repository = module.get("PodcastRepository")
   })
 
   afterEach(async () => {
@@ -33,13 +33,13 @@ describe("Todos", () => {
     await app.close()
   })
 
-  describe("GET /todos", () => {
-    it("should return an array of todos", async () => {
+  describe("GET /podcasts", () => {
+    it("should return an array of podcasts", async () => {
       await repository.save([{ text: "test-name-0" }, { text: "test-name-1" }])
 
       const { body } = await supertest
         .agent(app.getHttpServer())
-        .get("/todos")
+        .get("/podcasts")
         .set("Accept", "application/json")
         .expect("Content-Type", /json/)
         .expect(200)
@@ -50,26 +50,26 @@ describe("Todos", () => {
       ])
     })
 
-    it("should return a single todo", async () => {
-      const todo = await repository.save({ text: "test-name-0" })
+    it("should return a single podcast", async () => {
+      const podcast = await repository.save({ text: "test-name-0" })
 
       const { body } = await supertest
         .agent(app.getHttpServer())
-        .get(`/todos/${todo.id}`)
+        .get(`/podcasts/${podcast.id}`)
         .set("Accept", "application/json")
         .expect("Content-Type", /json/)
         .expect(200)
 
-      expect(body).toEqual({ id: todo.id, text: "test-name-0", ...dateExpectations })
+      expect(body).toEqual({ id: podcast.id, text: "test-name-0", ...dateExpectations })
     })
 
-    it("should create one todo", async () => {
-      const todo = { text: "test-name-0" }
+    it("should create one podcast", async () => {
+      const podcast = { text: "test-name-0" }
 
       const { body } = await supertest
         .agent(app.getHttpServer())
-        .post("/todos")
-        .send(todo)
+        .post("/podcasts")
+        .send(podcast)
         .set("Accept", "application/json")
         .expect("Content-Type", /json/)
         .expect(201)
@@ -77,13 +77,13 @@ describe("Todos", () => {
       expect(body).toEqual({ id: expect.any(Number), text: "test-name-0", ...dateExpectations })
     })
 
-    it("should create multiple todos", async () => {
-      const todos = [{ text: "test-name-0" }, { text: "test-name-1" }]
+    it("should create multiple podcasts", async () => {
+      const podcasts = [{ text: "test-name-0" }, { text: "test-name-1" }]
 
       const { body } = await supertest
         .agent(app.getHttpServer())
-        .post("/todos/bulk")
-        .send({ bulk: todos })
+        .post("/podcasts/bulk")
+        .send({ bulk: podcasts })
         .set("Accept", "application/json")
         .expect("Content-Type", /json/)
         .expect(201)
@@ -94,12 +94,12 @@ describe("Todos", () => {
       ])
     })
 
-    it("should update the name of a todo", async () => {
-      const todo = await repository.save({ text: "test-name-0" })
+    it("should update the name of a podcast", async () => {
+      const podcast = await repository.save({ text: "test-name-0" })
 
       const { body } = await supertest
         .agent(app.getHttpServer())
-        .put(`/todos/${todo.id}`)
+        .put(`/podcasts/${podcast.id}`)
         .send({ text: "updated-name" })
         .set("Accept", "application/json")
         .expect("Content-Type", /json/)
@@ -108,17 +108,17 @@ describe("Todos", () => {
       expect(body).toEqual({ id: expect.any(Number), text: "updated-name", ...dateExpectations })
     })
 
-    it("should delete one todo", async () => {
-      const todo = await repository.save({ text: "test-name-0" })
+    it("should delete one podcast", async () => {
+      const podcast = await repository.save({ text: "test-name-0" })
 
       await supertest
         .agent(app.getHttpServer())
-        .delete(`/todos/${todo.id}`)
+        .delete(`/podcasts/${podcast.id}`)
         .set("Accept", "application/json")
         .expect(200)
-      const missingTodo = await repository.findOne({ id: todo.id })
+      const missingPodcast = await repository.findOne({ id: podcast.id })
 
-      expect(missingTodo).toBe(undefined)
+      expect(missingPodcast).toBe(undefined)
     })
   })
 })

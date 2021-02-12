@@ -2,7 +2,7 @@ version: "3.6"
 services:
   database:
     image: postgres:latest
-    container_name: stator-postgres
+    container_name: poochCaster-postgres
     ports:
       - 5433:5432
     restart: always
@@ -11,7 +11,7 @@ services:
       - -c
       - listen_addresses=*
     environment:
-      POSTGRES_DB: stator
+      POSTGRES_DB: poochCaster
       POSTGRES_HOST_AUTH_METHOD: "trust" # Not recommended, only for demo purposes
     volumes:
       # seeding

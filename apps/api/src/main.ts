@@ -9,7 +9,7 @@ import { AppModule } from "./app/app.module"
 async function bootstrap() {
   const globalPrefix = "api"
   const fastifyOptions = { logger: true }
-
+  
   const app = await NestFactory.create<NestFastifyApplication>(AppModule, new FastifyAdapter(fastifyOptions))
   app.useGlobalPipes(new ValidationPipe())
   app.enableShutdownHooks()
@@ -17,10 +17,10 @@ async function bootstrap() {
   app.setGlobalPrefix(globalPrefix)
 
   const swaggerOptions = new DocumentBuilder()
-    .setTitle("Todos")
-    .setDescription("The todos API description")
+    .setTitle("Podcasts")
+    .setDescription("The podcasts API description")
     .setVersion("1.0")
-    .addTag("todos")
+    .addTag("podcasts")
     .build()
 
   const document = SwaggerModule.createDocument(app, swaggerOptions)

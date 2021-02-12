@@ -1,4 +1,4 @@
-name: stator CI
+name: poochCaster CI
 
 on:
   pull_request:

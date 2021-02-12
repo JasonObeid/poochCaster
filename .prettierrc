@@ -4,7 +4,7 @@
   "arrowParens": "avoid",
   "tabWidth": 2,
   "trailingComma": "es5",
-  "semi": false,
+  "semi": true,
   "jsxSingleQuote": false,
   "jsxBracketSameLine": false,
   "printWidth": 120
