@@ -1,9 +1,9 @@
-import { ConfigService } from "@nestjs/config"
-import { TypeOrmModuleOptions } from "@nestjs/typeorm/dist/interfaces/typeorm-options.interface"
-import { Podcast } from "@poochCaster/models"
+import { ConfigService } from "@nestjs/config";
+import { TypeOrmModuleOptions } from "@nestjs/typeorm/dist/interfaces/typeorm-options.interface";
+import { Podcaster } from "@poochCaster/models";
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const ormConfig = require("../../../database/orm-config")
+const ormConfig = require("../../../database/orm-config");
 
 export const configuration = () => ({
   port: parseInt(process.env.PORT, 10) || 3333,
@@ -18,7 +18,7 @@ export const configuration = () => ({
     synchronize: ormConfig.synchronize,
     certificateAuthority: process.env.DATABASE_CA_CERT,
   },
-})
+});
 
 export const getOrmConfigFn = async (configService: ConfigService): Promise<TypeOrmModuleOptions> =>
   Promise.resolve({
@@ -34,5 +34,5 @@ export const getOrmConfigFn = async (configService: ConfigService): Promise<Type
           ca: configService.get("database.certificateAuthority"),
         }
       : false,
-    entities: [Podcast],
-  })
+    entities: [Podcaster],
+  });

@@ -14,48 +14,53 @@ import React from "react";
 
 import { useAppStyles } from "../app/app.styles";
 
-export default function () {
-  const classes = useAppStyles();
-  return (
-    <Drawer
-      className={classes.drawer}
-      variant="permanent"
-      classes={{
-        paper: classes.drawerPaper,
-      }}
-      anchor="left"
-    >
-      <Button color="primary">
-        <Typography variant="h6">poochCaster</Typography>
-        <img src="../assets/cat.svg" height="25px" width="auto" alt="cat"></img>
-      </Button>
-      <Divider />
-      <List>
-        <ListItem button>
-          <ListItemIcon>
-            <SearchIcon color="primary" />
-          </ListItemIcon>
-          <ListItemText primary="Search" />
-        </ListItem>
-        <ListItem button>
-          <ListItemIcon>
-            <InboxIcon color="primary" />
-          </ListItemIcon>
-          <ListItemText primary="Feed" />
-        </ListItem>
-        <ListItem button>
-          <ListItemIcon>
-            <SubscriptionsIcon color="primary" />
-          </ListItemIcon>
-          <ListItemText primary="Subscriptions" />
-        </ListItem>
-        <ListItem button>
-          <ListItemIcon>
-            <SettingsIcon color="primary" />
-          </ListItemIcon>
-          <ListItemText primary="Settings" />
-        </ListItem>
-      </List>
-    </Drawer>
-  );
+export default function Sidebar(props) {
+    const classes = useAppStyles();
+
+    const handleListItemClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>, index: number) => {
+        props.setSelectedIndex(index);
+    };
+
+    return (
+        <Drawer
+            className={classes.drawer}
+            variant="permanent"
+            classes={{
+                paper: classes.drawerPaper,
+            }}
+            anchor="left"
+        >
+            <Button color="primary">
+                <Typography variant="h6">poochCaster</Typography>
+                <img src="../assets/cat.svg" height="25px" width="auto" alt="cat"></img>
+            </Button>
+            <Divider />
+            <List component="nav" aria-label="main mailbox folders">
+                <ListItem button selected={props.selectedIndex === 0} onClick={event => handleListItemClick(event, 0)}>
+                    <ListItemIcon>
+                        <SearchIcon color="primary" />
+                    </ListItemIcon>
+                    <ListItemText primary="Search" />
+                </ListItem>
+                <ListItem button selected={props.selectedIndex === 1} onClick={event => handleListItemClick(event, 1)}>
+                    <ListItemIcon>
+                        <InboxIcon color="primary" />
+                    </ListItemIcon>
+                    <ListItemText primary="Feed" />
+                </ListItem>
+                <ListItem button selected={props.selectedIndex === 2} onClick={event => handleListItemClick(event, 2)}>
+                    <ListItemIcon>
+                        <SubscriptionsIcon color="primary" />
+                    </ListItemIcon>
+                    <ListItemText primary="Subscriptions" />
+                </ListItem>
+                <ListItem button selected={props.selectedIndex === 3} onClick={event => handleListItemClick(event, 3)}>
+                    <ListItemIcon>
+                        <SettingsIcon color="primary" />
+                    </ListItemIcon>
+                    <ListItemText primary="Settings" />
+                </ListItem>
+            </List>
+        </Drawer>
+    );
 }

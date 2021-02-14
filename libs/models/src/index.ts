@@ -1,2 +1,2 @@
-export * from "./lib/root.entity"
-export * from "./lib/podcast.entity"
+export * from "./lib/root.entity";
+export * from "./lib/podcaster.entity";
