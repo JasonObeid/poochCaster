@@ -20,10 +20,16 @@ function Search(props) {
 
     useEffect(() => {
         console.log(params);
+        // eslint-disable-next-line no-prototype-builtins
         if (params.hasOwnProperty("term")) {
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            //@ts-ignore
             if (params.term !== "") {
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                //@ts-ignore
                 if (params.term !== searchText) {
-                    console.log(params.term);
+                    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                    //@ts-ignore
                     const initialText = params.term;
                     fetchData(initialText);
                     setSearchText(initialText);
