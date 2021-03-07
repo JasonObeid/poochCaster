@@ -1,14 +1,27 @@
 version: "3.6"
 
 services:
-  api:
-    build:
-      context: ./
-      dockerfile: dockerfiles/api/Dockerfile
-    network_mode: host
-  webapp:
-    build:
-      context: ./
-      dockerfile: dockerfiles/webapp/Dockerfile
-    ports:
-    - 8000:80
+    api:
+        build:
+            context: ./
+            dockerfile: dockerfiles/api/Dockerfile
+        network_mode: host
+    webapp:
+        build:
+            context: ./
+            dockerfile: dockerfiles/webapp/Dockerfile
+        ports:
+            - 8000:80
+    webserver:
+        image: nginx:alpine
+        container_name: webserver
+        restart: unless-stopped
+        tty: true
+        ports:
+            - "80:80"
+            - "443:443"
+        networks:
+            - app-network
+    networks:
+    app-network:
+        driver: bridge

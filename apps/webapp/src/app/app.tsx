@@ -16,8 +16,8 @@ import {
     returnCall,
     returnPost,
 } from "../components/helper-functions";
-import Login from "../components/Login";
-import Player from "../components/Player";
+import Login from "../components/login";
+import Player from "../components/player";
 import Search from "../components/search";
 import Sidebar from "../components/sidebar";
 import Subscriptions from "../components/subscriptions";
