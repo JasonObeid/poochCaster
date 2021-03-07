@@ -1,5 +1,5 @@
 FROM node:alpine
-WORKDIR /opt
+WORKDIR /root/poochCaster
 COPY package.json package-lock.json dist/apps/api ./
 RUN npm ci --production
 EXPOSE 3333

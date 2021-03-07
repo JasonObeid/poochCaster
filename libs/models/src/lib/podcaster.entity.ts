@@ -8,12 +8,15 @@ export class Podcaster extends RootEntity {
     @Column("simple-array", { nullable: true })
     subscriptions: Array<string>;
 
-    @Column("simple-array", { nullable: true })
-    playbackStates: Map<string, number>;
+    @Column({ nullable: true })
+    playbackStates: string;
+
+    @Column("simple-json", { nullable: true })
+    activeEpisode: any;
+
+    @Column({ nullable: true, type: "decimal" })
+    volume: number;
 
     @Column({ nullable: true })
-    activeEpisode: string;
-
-    //@Column({ nullable: true })
-    //volume: number;
+    isMuted: boolean;
 }

@@ -11,15 +11,13 @@ import SearchIcon from "@material-ui/icons/Search";
 import SettingsIcon from "@material-ui/icons/Settings";
 import SubscriptionsIcon from "@material-ui/icons/Subscriptions";
 import React from "react";
+import { Link, BrowserRouter as Router, Switch, useLocation } from "react-router-dom";
 
 import { useAppStyles } from "../app/app.styles";
 
-export default function Sidebar(props) {
+function Sidebar() {
+    const location = useLocation();
     const classes = useAppStyles();
-
-    const handleListItemClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>, index: number) => {
-        props.setSelectedIndex(index);
-    };
 
     return (
         <Drawer
@@ -35,26 +33,46 @@ export default function Sidebar(props) {
                 <img src="../assets/cat.svg" height="25px" width="auto" alt="cat"></img>
             </Button>
             <Divider />
-            <List component="nav" aria-label="main mailbox folders">
-                <ListItem button selected={props.selectedIndex === 0} onClick={event => handleListItemClick(event, 0)}>
+            <List component="nav" aria-label="search feed subscriptions settings">
+                <ListItem
+                    component={Link}
+                    to="/search"
+                    selected={location.pathname.includes("/search")}
+                    className={classes.blackText}
+                >
                     <ListItemIcon>
                         <SearchIcon color="primary" />
                     </ListItemIcon>
                     <ListItemText primary="Search" />
                 </ListItem>
-                <ListItem button selected={props.selectedIndex === 1} onClick={event => handleListItemClick(event, 1)}>
+                <ListItem
+                    component={Link}
+                    to="/feeds"
+                    selected={location.pathname === "/feeds"}
+                    className={classes.blackText}
+                >
                     <ListItemIcon>
                         <InboxIcon color="primary" />
                     </ListItemIcon>
                     <ListItemText primary="Feed" />
                 </ListItem>
-                <ListItem button selected={props.selectedIndex === 2} onClick={event => handleListItemClick(event, 2)}>
+                <ListItem
+                    component={Link}
+                    to="/subscriptions"
+                    selected={location.pathname === "/subscriptions"}
+                    className={classes.blackText}
+                >
                     <ListItemIcon>
                         <SubscriptionsIcon color="primary" />
                     </ListItemIcon>
                     <ListItemText primary="Subscriptions" />
                 </ListItem>
-                <ListItem button selected={props.selectedIndex === 3} onClick={event => handleListItemClick(event, 3)}>
+                <ListItem
+                    component={Link}
+                    to="/settings"
+                    selected={location.pathname === "/settings"}
+                    className={classes.blackText}
+                >
                     <ListItemIcon>
                         <SettingsIcon color="primary" />
                     </ListItemIcon>
@@ -64,3 +82,5 @@ export default function Sidebar(props) {
         </Drawer>
     );
 }
+
+export default React.memo(Sidebar);

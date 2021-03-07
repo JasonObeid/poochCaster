@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import Feed from "./feed";
 import { returnCall } from "./helper-functions";
 
-export default function Feeds(props) {
+function Feeds(props) {
     async function fetchData() {
         const searchResults = await returnCall(`api/search/${props.searchText}`);
         props.setSearchResults(searchResults.feeds);
@@ -19,8 +19,8 @@ export default function Feeds(props) {
     };
     return (
         <Grid container spacing={3} direction="column" alignItems="stretch">
-            {props.feed.map(episode => (
-                <Grid item key={episode.id}>
+            {props.feed.slice(10).map(episode => (
+                <Grid item xs key={episode.id}>
                     <Feed
                         episode={episode}
                         uuid={props.uuid}
@@ -36,3 +36,5 @@ export default function Feeds(props) {
         </Grid>
     );
 }
+
+export default React.memo(Feeds);

@@ -1,3 +1,4 @@
+import { Link } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
@@ -21,6 +22,8 @@ async function getResizedImg(url) {
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         layout: {
+            maxWidth: "50rem",
+            minWidth: "35rem",
             display: "grid",
             gridTemplateColumns: "0.1fr 10fr 1fr",
             gridGap: "2rem",
@@ -70,9 +73,9 @@ function Podcast(props) {
             <CardContent className={classes.layout}>
                 <div></div>
                 <div>
-                    <Typography gutterBottom variant="h5" component="h2">
+                    <Link gutterBottom variant="h5" href={`/podcast/${props.podcast.id}`}>
                         {props.podcast.title}
-                    </Typography>
+                    </Link>
                     <Typography variant="body2" color="textSecondary" component="p">
                         {props.podcast.description}
                     </Typography>

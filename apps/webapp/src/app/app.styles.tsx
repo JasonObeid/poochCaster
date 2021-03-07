@@ -8,6 +8,9 @@ export const useAppStyles = makeStyles((theme: Theme) => ({
     root: {
         display: "flex",
     },
+    rounded: {
+        borderRadius: "0.7rem",
+    },
     appBar: {
         width: `calc(100% - ${drawerWidth}px)`,
         marginLeft: drawerWidth,
@@ -20,12 +23,20 @@ export const useAppStyles = makeStyles((theme: Theme) => ({
         width: drawerWidth,
     },
     content: {
+        margin: "auto",
+        maxWidth: "50rem",
+        minWidth: "35rem",
+        display: "flex",
+        flexDirection: "column",
         flexGrow: 1,
-        backgroundColor: theme.palette.background.default,
-        padding: theme.spacing(3),
+        //backgroundColor: theme.palette.background.default,
+        paddingLeft: theme.spacing(3),
+        paddingRight: theme.spacing(3),
+        paddingBottom: theme.spacing(3),
     },
     slider: {
         margin: "auto 1rem",
+        width: "80%",
     },
     footer: {
         position: "fixed",
@@ -33,7 +44,7 @@ export const useAppStyles = makeStyles((theme: Theme) => ({
         bottom: 0,
         left: 0,
         background: blueGrey[200],
-        height: "80px",
+        height: "90px",
         zIndex: 9999,
         display: "grid",
         gridTemplateColumns: "80px 2fr 4fr 1fr",
@@ -41,5 +52,18 @@ export const useAppStyles = makeStyles((theme: Theme) => ({
     },
     dFlex: {
         display: "flex",
+    },
+    dInlineFlex: {
+        display: "inline-flex",
+    },
+    textCenter: {
+        textAlign: "center",
+    },
+    panel: {
+        margin: "auto",
+        width: "66%",
+    },
+    blackText: {
+        color: "black",
     },
 }));

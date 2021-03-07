@@ -1,1 +1,1 @@
-{ "extends": "../../.eslintrc", "rules": { "allowSyntheticDefaultImports": true }, "ignorePatterns": ["!**/*"] }
+{ "extends": "../../.eslintrc", "rules": { "allowSyntheticDefaultImports": 1 }, "ignorePatterns": ["!**/*"] }

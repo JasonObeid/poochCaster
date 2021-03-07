@@ -56,6 +56,15 @@ async function returnPut(endpoint: string, body: any) {
     }
 }
 
+function getCurrentPlayback(playbackStates, episodeID, duration) {
+    if (playbackStates instanceof Map) {
+        if (playbackStates.has(episodeID)) {
+            return Math.round((playbackStates.get(episodeID) / duration) * 100);
+        }
+    }
+    return 0;
+}
+
 async function getPodcaster(uuid: string) {
     const response = await returnCall(`podcasters/${uuid}`);
     return response;
@@ -68,4 +77,4 @@ async function putPodcaster(podcaster: Podcaster) {
     const response = await returnPut(`podcasters/${podcaster.id}`, podcaster);
     return response;
 }
-export { returnCall, returnPost, getPodcaster, postPodcaster, putPodcaster, getImage };
+export { returnCall, returnPost, getPodcaster, postPodcaster, putPodcaster, getImage, getCurrentPlayback };

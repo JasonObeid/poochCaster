@@ -1,5 +1,5 @@
-import { Controller, Get, Param, Req, Post, Body } from "@nestjs/common";
-
+import { Controller, Get, Param, Req, Post, Body, Request, UseGuards } from "@nestjs/common";
+import { AuthGuard } from '@nestjs/passport';
 
 let PodcastIndexClient = require("podcastdx-client");
 const API_KEY = 'NBQWUW27WADSKUYNJFND';
@@ -9,6 +9,8 @@ const client = new PodcastIndexClient({
   secret: API_SECRET,
   enableAnalytics: false
 });
+import { OAuth2Client } from 'google-auth-library';
+const clients = new OAuth2Client("384920596947-68g7ga9dfqt43bouolbrtghn45p9g2dt.apps.googleusercontent.com")
 //require("dotenv").config({ path: './.env' }
 //console.log(process.env.API_KEY)
 @Controller("api")
@@ -25,6 +27,23 @@ export class ApiController {
   //   axios.request(body.source).pipe(resizer);
   //   return localFilePath;
   // }
+  //@UseGuards(AuthGuard('local'))
+  @Post('auth/login')
+  async login(@Request() req) {
+    const { token } = req.body
+    try {
+      const ticket = await clients.verifyIdToken({
+          idToken: token,
+          audience: "384920596947-68g7ga9dfqt43bouolbrtghn45p9g2dt.apps.googleusercontent.com"
+      });
+      const { name, email, picture } = ticket.getPayload();
+      return { loginSuccess: true, name: name, email: email, picture: picture };
+    }
+    catch {
+      return { loginSuccess: false };
+    }
+  }
+
   @Post('getSubscriptionsDetails')
   async getSubscriptionsDetails(@Body() body): Promise<Array<any>> {
     let subscriptionsArray:Array<any> = [];
